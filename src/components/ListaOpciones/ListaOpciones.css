@@ -1,0 +1,4 @@
+.selectedDefault option:checked {
+    font-style: italic;
+    color: #6B7280; /* slate-500 color */
+}
