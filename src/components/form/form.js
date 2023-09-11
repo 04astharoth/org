@@ -1,5 +1,6 @@
-import { useState } from "react";
 import "./form.css";
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
 import CampoTexto from "../input/TextInput";
 import ListaOpciones from "../ListaOpciones";
 import Boton from "../Boton";
@@ -20,6 +21,7 @@ const Formulario = (props) => {
 			puesto,
 			foto,
 			equipo,
+			id: uuid(),
 		};
 		registrarColaborador(datosEmpleado);
 	};
