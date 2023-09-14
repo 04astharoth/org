@@ -1,13 +1,12 @@
 import "./equipo.css";
-import hexToRgba from 'hex-to-rgba';
 import Colaborador from "../Colaborador";
 
 const Equipo = (props) => {
-	const { id, titulo, bgSection, bgCard, underlineColor, colorPrimario, colorSecundario } = props.equipo;
-	const { colaboradores, eliminarColaborador, actualizarColorEquipo } = props;
+	const { id, titulo, colorPrimario, colorSecundario } = props.equipo;
+	const { colaboradores, eliminarColaborador, actualizarColorEquipo, like } = props;
 
 	const bgColorEquipo = {
-		backgroundColor: hexToRgba(colorPrimario, 0.6)
+		backgroundColor: colorSecundario
 	}
 	const ColorUnderline = {
 		borderColor:colorPrimario
@@ -33,7 +32,7 @@ const Equipo = (props) => {
 						<h3 className={`font-serif text-[2rem] font-normal pb-2 border-b-4`} style={ColorUnderline}>
 							{titulo}
 						</h3>
-						<div className="colaboradores flex justify-evenly flex-wrap pt-[52px] w-full">
+						<div className="colaboradores flex justify-evenly flex-wrap w-full pt-[52px]">
 							{/* <Colaborador bgCard={bgCard} /> */}
 							{colaboradores.map((colaborador) => {
 								// console.log(colaborador);
@@ -43,6 +42,7 @@ const Equipo = (props) => {
 										bgCard={colorPrimario}
 										colaborador={colaborador}
 										eliminarColaborador={eliminarColaborador}
+										like={like}
 									/>
 								);
 							})}
