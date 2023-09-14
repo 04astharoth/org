@@ -12,63 +12,42 @@ function App() {
 		{
 			id: uuid(),
 			titulo: "Programación",
-			bgCard: "bg-equipo-pr-card",
-			bgSection: "bg-equipo-pr-fondo",
-			underlineColor: "border-b-equipo-pr-card",
 			colorPrimario: "#57C278",
 			colorSecundario: "#D9F7E9",
 		},
 		{
 			id: uuid(),
 			titulo: "Front End",
-			bgCard: "bg-equipo-fe-card",
-			bgSection: "bg-equipo-fe-fondo",
-			underlineColor: "border-b-equipo-fe-card",
 			colorPrimario: "#82CFFA",
 			colorSecundario: "#E8F8FF",
 		},
 		{
 			id: uuid(),
 			titulo: "Data Science",
-			bgCard: "bg-equipo-ds-card",
-			bgSection: "bg-equipo-ds-fondo",
-			underlineColor: "border-b-equipo-ds-card",
 			colorPrimario: "#A6D157",
 			colorSecundario: "#F0F8E2",
 		},
 		{
 			id: uuid(),
 			titulo: "DevOps",
-			bgCard: "bg-equipo-do-card",
-			bgSection: "bg-equipo-do-fondo",
-			underlineColor: "border-b-equipo-do-card",
 			colorPrimario: "#E06B69",
 			colorSecundario: "#FDE7E8",
 		},
 		{
 			id: uuid(),
 			titulo: "UX y Diseño",
-			bgCard: "bg-equipo-ud-card",
-			bgSection: "bg-equipo-ud-fondo",
-			underlineColor: "border-b-equipo-ud-card",
 			colorPrimario: "#DB6EBF",
 			colorSecundario: "#FAE9F5",
 		},
 		{
 			id: uuid(),
 			titulo: "Móvil",
-			bgCard: "bg-equipo-mov-card",
-			bgSection: "bg-equipo-mov-fondo",
-			underlineColor: "border-b-equipo-mov-card",
 			colorPrimario: "#FFBA05",
 			colorSecundario: "#FFF5D9",
 		},
 		{
 			id: uuid(),
 			titulo: "Innovación y  Gestión",
-			bgCard: "bg-equipo-ig-card",
-			bgSection: "bg-equipo-ig-fondo",
-			underlineColor: "border-b-equipo-ig-card",
 			colorPrimario: "#FF8A29",
 			colorSecundario: "#FFEEDF",
 		},
@@ -82,6 +61,7 @@ function App() {
 			foto: "https://github.com/harlandlohora.png",
 			nombre: "Harland Lohora",
 			puesto: "Instructor",
+			fav: true,
 		},
 		{
 			id: uuid(),
@@ -89,6 +69,7 @@ function App() {
 			foto: "https://github.com/genesysrm.png",
 			nombre: "Genesys Rondón",
 			puesto: "Desarrolladora de software e instructora",
+			fav: true,
 		},
 		{
 			id: uuid(),
@@ -96,6 +77,7 @@ function App() {
 			foto: "https://github.com/JeanmarieAluraLatam.png",
 			nombre: "Jeanmarie Quijada",
 			puesto: "Instructora en Alura Latam",
+			fav: false,
 		},
 		{
 			id: uuid(),
@@ -103,6 +85,7 @@ function App() {
 			foto: "https://github.com/christianpva.png",
 			nombre: "Christian Velasco",
 			puesto: "Head de Alura e Instructor",
+			fav: false,
 		},
 	]);
 
@@ -134,6 +117,21 @@ function App() {
 		actualizarEquipos(equiposActualizados);
 	};
 
+	const crearEquipo = (nuevoEquipo) => {
+		actualizarEquipos([...equipos, nuevoEquipo]);
+	};
+
+	const like = (id) => {
+		console.log("like", id);
+		const colaboradoresActualizados = colaboradores.map((colaborador) => {
+			if (colaborador.id === id) {
+				colaborador.fav = !colaborador.fav
+			}
+			return colaborador
+		});
+		actualizarColaboradores(colaboradoresActualizados);
+	};
+
 	return (
 		<div>
 			<Header />
@@ -142,6 +140,7 @@ function App() {
 				<Formulario
 					equipos={equipos.map((equipo) => equipo.titulo)}
 					registrarColaborador={registrarColaborador}
+					crearEquipo={crearEquipo}
 				/>
 			)}
 
@@ -155,6 +154,7 @@ function App() {
 						colaboradores={colaboradores.filter((colaborador) => colaborador.equipo === equipo.titulo)}
 						eliminarColaborador={eliminarColaborador}
 						actualizarColorEquipo={actualizarColorEquipo}
+						like={like}
 					/>
 				);
 			})}
